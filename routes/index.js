@@ -9,7 +9,11 @@ router.get("/", async (ctx, next) => {
 });
 
 router.get("/string", async (ctx, next) => {
-  ctx.body = "koa2 string";
+  const [results, metadata] = await db.sequelize.query(
+    "select * from activity_sys_perm limit 0,1"
+  );
+  console.log(results, metadata);
+  ctx.body = results;
 });
 
 router.get("/json", async (ctx, next) => {
