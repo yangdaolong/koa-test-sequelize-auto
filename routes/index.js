@@ -10,7 +10,7 @@ router.get("/", async (ctx, next) => {
 
 router.get("/string", async (ctx, next) => {
   const [results, metadata] = await db.sequelize.query(
-    "select * from activity_sys_perm limit 0,1"
+    "select u.id,u.user_name,r2.role_name from activity_sys_user u LEFT JOIN activity_sys_user_role r on u.id=r.user_id LEFT JOIN activity_sys_role r2 on r.role_id=r2.id"
   );
   console.log(results, metadata);
   ctx.body = results;
